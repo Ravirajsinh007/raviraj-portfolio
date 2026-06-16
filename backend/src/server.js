@@ -35,6 +35,23 @@ const authRoutes = require("./routes/authRoutes");
 const { protect } =
 require("./middleware/authMiddleware");
 
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Portfolio Backend API Running"
+  });
+});
+
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is healthy",
+    environment:
+      process.env.NODE_ENV || "development"
+  });
+});
+
 // Middleware
 app.use(cors());
 app.use(compression());
@@ -66,18 +83,18 @@ app.get(
   }
 );
 
-// Home Route
-app.get("/", (req, res) => {
-  res.send("Portfolio Backend Running 🚀");
-});
+// // Home Route
+// app.get("/", (req, res) => {
+//   res.send("Portfolio Backend Running 🚀");
+// });
 
-// Health Check Route
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Server is healthy"
-  });
-});
+// // Health Check Route
+// app.get("/api/health", (req, res) => {
+//   res.status(200).json({
+//     success: true,
+//     message: "Server is healthy"
+//   });
+// });
 
 const PORT = process.env.PORT || 5000;
 
